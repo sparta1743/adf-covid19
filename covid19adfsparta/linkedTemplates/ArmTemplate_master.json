@@ -7,6 +7,10 @@
 			"metadata": "Data Factory name",
 			"defaultValue": "covid19adfsparta"
 		},
+		"ls_delete_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'ls_delete'"
+		},
 		"ls_sink_adls2_population_accountKey": {
 			"type": "secureString",
 			"metadata": "Secure string for 'accountKey' of 'ls_sink_adls2_population'"
@@ -14,10 +18,6 @@
 		"ls_source_blob_population_connectionString": {
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'ls_source_blob_population'"
-		},
-		"ls_delete_connectionString": {
-			"type": "secureString",
-			"metadata": "Secure string for 'connectionString' of 'ls_delete'"
 		},
 		"ls_sink_adls2_population_properties_typeProperties_url": {
 			"type": "string",
@@ -54,14 +54,14 @@
 					"factoryName": {
 						"value": "[parameters('factoryName')]"
 					},
+					"ls_delete_connectionString": {
+						"value": "[parameters('ls_delete_connectionString')]"
+					},
 					"ls_sink_adls2_population_accountKey": {
 						"value": "[parameters('ls_sink_adls2_population_accountKey')]"
 					},
 					"ls_source_blob_population_connectionString": {
 						"value": "[parameters('ls_source_blob_population_connectionString')]"
-					},
-					"ls_delete_connectionString": {
-						"value": "[parameters('ls_delete_connectionString')]"
 					},
 					"ls_sink_adls2_population_properties_typeProperties_url": {
 						"value": "[parameters('ls_sink_adls2_population_properties_typeProperties_url')]"

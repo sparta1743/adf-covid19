@@ -5,13 +5,13 @@
 		"factoryName": {
 			"value": "covid19adfsparta"
 		},
+		"ls_delete_connectionString": {
+			"value": ""
+		},
 		"ls_sink_adls2_population_accountKey": {
 			"value": ""
 		},
 		"ls_source_blob_population_connectionString": {
-			"value": ""
-		},
-		"ls_delete_connectionString": {
 			"value": ""
 		},
 		"ls_sink_adls2_population_properties_typeProperties_url": {
