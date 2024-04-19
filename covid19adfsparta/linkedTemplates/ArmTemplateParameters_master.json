@@ -1,0 +1,30 @@
+{
+	"$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"value": "covid19adfsparta"
+		},
+		"ls_sink_adls2_population_accountKey": {
+			"value": ""
+		},
+		"ls_source_blob_population_connectionString": {
+			"value": ""
+		},
+		"ls_delete_connectionString": {
+			"value": ""
+		},
+		"ls_sink_adls2_population_properties_typeProperties_url": {
+			"value": "https://covidstorageadlsgen2.dfs.core.windows.net/"
+		},
+		"tr_eventbased_population_properties_typeProperties_scope": {
+			"value": "/subscriptions/63797bb5-70dc-4160-aed5-e905252e248d/resourceGroups/covid19_project/providers/Microsoft.Storage/storageAccounts/coviddataaccount"
+		},
+		"containerUri": {
+			"value": ""
+		},
+		"containerSasToken": {
+			"value": ""
+		}
+	}
+}

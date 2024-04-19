@@ -1,0 +1,77 @@
+{
+	"$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"type": "string",
+			"metadata": "Data Factory name",
+			"defaultValue": "covid19adfsparta"
+		},
+		"ls_sink_adls2_population_accountKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'accountKey' of 'ls_sink_adls2_population'"
+		},
+		"ls_source_blob_population_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'ls_source_blob_population'"
+		},
+		"ls_delete_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'ls_delete'"
+		},
+		"ls_sink_adls2_population_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://covidstorageadlsgen2.dfs.core.windows.net/"
+		},
+		"tr_eventbased_population_properties_typeProperties_scope": {
+			"type": "string",
+			"defaultValue": "/subscriptions/63797bb5-70dc-4160-aed5-e905252e248d/resourceGroups/covid19_project/providers/Microsoft.Storage/storageAccounts/coviddataaccount"
+		},
+		"containerUri": {
+			"type": "string",
+			"metadata": "URI to storage account containing linked ARM templates"
+		},
+		"containerSasToken": {
+			"type": "string",
+			"metadata": "Sas token to storage account containing linked ARM templates"
+		}
+	},
+	"variables": {
+		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
+	},
+	"resources": [
+		{
+			"name": "covid19adfsparta_ArmTemplate_0",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2018-02-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_0.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					},
+					"ls_sink_adls2_population_accountKey": {
+						"value": "[parameters('ls_sink_adls2_population_accountKey')]"
+					},
+					"ls_source_blob_population_connectionString": {
+						"value": "[parameters('ls_source_blob_population_connectionString')]"
+					},
+					"ls_delete_connectionString": {
+						"value": "[parameters('ls_delete_connectionString')]"
+					},
+					"ls_sink_adls2_population_properties_typeProperties_url": {
+						"value": "[parameters('ls_sink_adls2_population_properties_typeProperties_url')]"
+					},
+					"tr_eventbased_population_properties_typeProperties_scope": {
+						"value": "[parameters('tr_eventbased_population_properties_typeProperties_scope')]"
+					}
+				}
+			},
+			"dependsOn": []
+		}
+	]
+}
