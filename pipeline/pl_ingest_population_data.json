@@ -48,6 +48,7 @@
 					],
 					"storeSettings": {
 						"type": "AzureBlobStorageReadSettings",
+						"recursive": true,
 						"enablePartitionDiscovery": false
 					},
 					"formatSettings": {
@@ -77,7 +78,11 @@
 							"name": "Fail1",
 							"type": "Fail",
 							"dependsOn": [],
-							"userProperties": []
+							"userProperties": [],
+							"typeProperties": {
+								"message": "",
+								"errorCode": ""
+							}
 						}
 					],
 					"ifTrueActivities": [
@@ -138,6 +143,45 @@
 									"type": "DatasetReference"
 								}
 							]
+						},
+						{
+							"name": "Delete source file",
+							"type": "Delete",
+							"dependsOn": [
+								{
+									"activity": "Copy Population Data",
+									"dependencyConditions": [
+										"Succeeded"
+									]
+								}
+							],
+							"policy": {
+								"timeout": "0.12:00:00",
+								"retry": 0,
+								"retryIntervalInSeconds": 30,
+								"secureOutput": false,
+								"secureInput": false
+							},
+							"userProperties": [],
+							"typeProperties": {
+								"dataset": {
+									"referenceName": "ds_source_blob_population",
+									"type": "DatasetReference"
+								},
+								"logStorageSettings": {
+									"linkedServiceName": {
+										"referenceName": "ls_delete",
+										"type": "LinkedServiceReference"
+									},
+									"path": "delete-file"
+								},
+								"enableLogging": true,
+								"storeSettings": {
+									"type": "AzureBlobStorageReadSettings",
+									"recursive": true,
+									"enablePartitionDiscovery": false
+								}
+							}
 						}
 					]
 				}
