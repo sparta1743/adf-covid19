@@ -1,0 +1,9 @@
+{
+	"name": "covid19adfsparta",
+	"location": "centralindia",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "bfb04d0a-a3bc-4f3f-ac9d-9e8491f19e39",
+		"tenantId": "124c8f68-d504-44ed-8217-e35306a1b77c"
+	}
+}
