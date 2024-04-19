@@ -1,10 +1,15 @@
 {
 	"name": "ls_http_source_ecdc_data",
 	"properties": {
+		"parameters": {
+			"base_url": {
+				"type": "string"
+			}
+		},
 		"annotations": [],
 		"type": "HttpServer",
 		"typeProperties": {
-			"url": "https://github.com/cloudboxacademy/covid19/raw/main/ecdc_data/",
+			"url": "@{linkedService().base_url}",
 			"enableServerCertificateValidation": true,
 			"authenticationType": "Anonymous"
 		}
