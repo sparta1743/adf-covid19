@@ -1,0 +1,17 @@
+{
+	"name": "tr_eventbased_population",
+	"properties": {
+		"annotations": [],
+		"runtimeState": "Stopped",
+		"pipelines": [],
+		"type": "BlobEventsTrigger",
+		"typeProperties": {
+			"blobPathBeginsWith": "/population/blobs/population",
+			"ignoreEmptyBlobs": true,
+			"scope": "/subscriptions/63797bb5-70dc-4160-aed5-e905252e248d/resourceGroups/covid19_project/providers/Microsoft.Storage/storageAccounts/coviddataaccount",
+			"events": [
+				"Microsoft.Storage.BlobCreated"
+			]
+		}
+	}
+}
