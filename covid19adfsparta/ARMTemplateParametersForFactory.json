@@ -14,6 +14,9 @@
 		"ls_source_blob_population_connectionString": {
 			"value": ""
 		},
+		"ls_http_source_ecdc_data_properties_typeProperties_url": {
+			"value": "@{linkedService().base_url}"
+		},
 		"ls_sink_adls2_population_properties_typeProperties_url": {
 			"value": "https://covidstorageadlsgen2.dfs.core.windows.net/"
 		},

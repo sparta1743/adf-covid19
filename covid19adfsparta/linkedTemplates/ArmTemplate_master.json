@@ -19,6 +19,10 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'ls_source_blob_population'"
 		},
+		"ls_http_source_ecdc_data_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "@{linkedService().base_url}"
+		},
 		"ls_sink_adls2_population_properties_typeProperties_url": {
 			"type": "string",
 			"defaultValue": "https://covidstorageadlsgen2.dfs.core.windows.net/"
@@ -62,6 +66,9 @@
 					},
 					"ls_source_blob_population_connectionString": {
 						"value": "[parameters('ls_source_blob_population_connectionString')]"
+					},
+					"ls_http_source_ecdc_data_properties_typeProperties_url": {
+						"value": "[parameters('ls_http_source_ecdc_data_properties_typeProperties_url')]"
 					},
 					"ls_sink_adls2_population_properties_typeProperties_url": {
 						"value": "[parameters('ls_sink_adls2_population_properties_typeProperties_url')]"
