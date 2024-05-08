@@ -3,8 +3,8 @@
 	"properties": {
 		"activities": [
 			{
-				"name": "Copy ECDC cases_deaths data",
-				"type": "Copy",
+				"name": "Lookup ECDC FileList",
+				"type": "Lookup",
 				"dependsOn": [],
 				"policy": {
 					"timeout": "0.12:00:00",
@@ -16,51 +16,112 @@
 				"userProperties": [],
 				"typeProperties": {
 					"source": {
-						"type": "DelimitedTextSource",
+						"type": "JsonSource",
 						"storeSettings": {
-							"type": "HttpReadSettings",
-							"requestMethod": "GET"
+							"type": "AzureBlobStorageReadSettings",
+							"recursive": true,
+							"enablePartitionDiscovery": false
 						},
 						"formatSettings": {
-							"type": "DelimitedTextReadSettings"
+							"type": "JsonReadSettings"
 						}
 					},
-					"sink": {
-						"type": "DelimitedTextSink",
-						"storeSettings": {
-							"type": "AzureBlobFSWriteSettings"
-						},
-						"formatSettings": {
-							"type": "DelimitedTextWriteSettings",
-							"quoteAllText": true,
-							"fileExtension": ".txt"
-						}
-					},
-					"enableStaging": false,
-					"translator": {
-						"type": "TabularTranslator",
-						"typeConversion": true,
-						"typeConversionSettings": {
-							"allowDataTruncation": true,
-							"treatBooleanAsNumber": false
-						}
-					}
-				},
-				"inputs": [
-					{
-						"referenceName": "ds_ecdc_source_cases_deaths",
+					"dataset": {
+						"referenceName": "ds_source_lookup_configs",
 						"type": "DatasetReference"
+					},
+					"firstRowOnly": false
+				}
+			},
+			{
+				"name": "Execute Copy for Every record",
+				"type": "ForEach",
+				"dependsOn": [
+					{
+						"activity": "Lookup ECDC FileList",
+						"dependencyConditions": [
+							"Succeeded"
+						]
 					}
 				],
-				"outputs": [
-					{
-						"referenceName": "ds_sink_adls2cases_death",
-						"type": "DatasetReference"
-					}
-				]
+				"userProperties": [],
+				"typeProperties": {
+					"items": {
+						"value": "@activity('Lookup ECDC FileList').output.value",
+						"type": "Expression"
+					},
+					"isSequential": true,
+					"activities": [
+						{
+							"name": "Copy ECDC data",
+							"type": "Copy",
+							"dependsOn": [],
+							"policy": {
+								"timeout": "0.12:00:00",
+								"retry": 0,
+								"retryIntervalInSeconds": 30,
+								"secureOutput": false,
+								"secureInput": false
+							},
+							"userProperties": [],
+							"typeProperties": {
+								"source": {
+									"type": "BinarySource",
+									"storeSettings": {
+										"type": "HttpReadSettings",
+										"requestMethod": "GET"
+									},
+									"formatSettings": {
+										"type": "BinaryReadSettings"
+									}
+								},
+								"sink": {
+									"type": "BinarySink",
+									"storeSettings": {
+										"type": "AzureBlobFSWriteSettings"
+									}
+								},
+								"enableStaging": false
+							},
+							"inputs": [
+								{
+									"referenceName": "ds_source_http_cases_deaths",
+									"type": "DatasetReference",
+									"parameters": {
+										"source_relative_url": {
+											"value": "@item().sourceRelativeURL",
+											"type": "Expression"
+										},
+										"base_url": {
+											"value": "@item().sourceBaseURL",
+											"type": "Expression"
+										}
+									}
+								}
+							],
+							"outputs": [
+								{
+									"referenceName": "ds_sink_adls2_cases_deaths",
+									"type": "DatasetReference",
+									"parameters": {
+										"sink_file_name": {
+											"value": "@item().sinkFileName",
+											"type": "Expression"
+										}
+									}
+								}
+							]
+						}
+					]
+				}
 			}
 		],
 		"concurrency": 1,
-		"annotations": []
-	}
+		"folder": {
+			"name": "Ingest"
+		},
+		"annotations": [],
+		"lastPublishTime": "2024-05-05T16:55:20Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
 }

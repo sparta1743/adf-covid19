@@ -1,5 +1,5 @@
 {
-	"name": "ds_sink_adls2_population",
+	"name": "ds_country_lookup",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "ls_adls2_sink_population",
@@ -10,16 +10,36 @@
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobFSLocation",
-				"fileName": "population.csv",
-				"folderPath": "population",
-				"fileSystem": "output"
+				"fileName": "country-lookup.csv",
+				"fileSystem": "lookup"
 			},
 			"columnDelimiter": ",",
 			"escapeChar": "\\",
 			"firstRowAsHeader": true,
 			"quoteChar": "\""
 		},
-		"schema": []
+		"schema": [
+			{
+				"name": "country",
+				"type": "String"
+			},
+			{
+				"name": "country_code_2_digit",
+				"type": "String"
+			},
+			{
+				"name": "country_code_3_digit",
+				"type": "String"
+			},
+			{
+				"name": "continent",
+				"type": "String"
+			},
+			{
+				"name": "population",
+				"type": "String"
+			}
+		]
 	},
 	"type": "Microsoft.DataFactory/factories/datasets"
 }

@@ -1,5 +1,5 @@
 {
-	"name": "ds_sink_adls2_population",
+	"name": "ds_sink_daily",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "ls_adls2_sink_population",
@@ -10,9 +10,8 @@
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobFSLocation",
-				"fileName": "population.csv",
-				"folderPath": "population",
-				"fileSystem": "output"
+				"folderPath": "ecdc_data/hospital_admissions_daily",
+				"fileSystem": "processed"
 			},
 			"columnDelimiter": ",",
 			"escapeChar": "\\",

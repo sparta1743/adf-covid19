@@ -1,18 +1,17 @@
 {
-	"name": "ds_sink_adls2_population",
+	"name": "ds_blob_population",
 	"properties": {
 		"linkedServiceName": {
-			"referenceName": "ls_adls2_sink_population",
+			"referenceName": "ls_blob_population",
 			"type": "LinkedServiceReference"
 		},
 		"annotations": [],
 		"type": "DelimitedText",
 		"typeProperties": {
 			"location": {
-				"type": "AzureBlobFSLocation",
-				"fileName": "population.csv",
-				"folderPath": "population",
-				"fileSystem": "output"
+				"type": "AzureBlobStorageLocation",
+				"fileName": "019 population-by-age.tsv",
+				"container": "population"
 			},
 			"columnDelimiter": ",",
 			"escapeChar": "\\",
